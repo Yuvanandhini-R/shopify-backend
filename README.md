@@ -25,18 +25,16 @@ This project is a Node.js-based backend service that integrates Firebase for dat
 Follow the steps below to set up and run the project locally.
 
 1. Initialize the Project
-bash
-Copy
-Edit
+
 npm init -y
+
 2. Install Dependencies
 Install the necessary packages:
 
-bash
-Copy
-Edit
 npm install express body-parser dotenv firebase-admin
 npm install resend
+
+
 🔧 Firebase Setup
 Go to the Firebase Console and create a new project.
 
@@ -49,9 +47,10 @@ Click Generate new private key, which will download a JSON file.
 Rename and move this file to your project directory as:
 
 pgsql
-Copy
-Edit
+
 firebaseserviceAccountKey.json
+
+
 ⚙️ Firebase Configuration
 Copy the Realtime Database URL from your Firebase project.
 
@@ -59,9 +58,6 @@ Create a file named firebaseConfig.js in the root of your project.
 
 Use the following structure to configure Firebase:
 
-js
-Copy
-Edit
 // firebaseConfig.js
 const admin = require("firebase-admin");
 const serviceAccount = require("./firebaseserviceAccountKey.json");
@@ -73,11 +69,9 @@ admin.initializeApp({
 
 module.exports = admin;
 📝 Environment Variables
+
 Create a .env file in the root directory to store sensitive information like API keys:
 
-env
-Copy
-Edit
 RESEND_API_KEY=your_resend_api_key_here
 Make sure to add .env to your .gitignore file.
 
