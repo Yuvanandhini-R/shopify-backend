@@ -19,6 +19,68 @@ This ensures reliable order logging and immediate admin awareness.
 ---
 
 ## ⚙️ Project Setup Instructions
+This project is a Node.js-based backend service that integrates Firebase for data storage and Resend for email services. It is structured for clarity, environment variable security, and ease of development.
+
+🚀 Getting Started
+Follow the steps below to set up and run the project locally.
+
+1. Initialize the Project
+bash
+Copy
+Edit
+npm init -y
+2. Install Dependencies
+Install the necessary packages:
+
+bash
+Copy
+Edit
+npm install express body-parser dotenv firebase-admin
+npm install resend
+🔧 Firebase Setup
+Go to the Firebase Console and create a new project.
+
+Enable Realtime Database in Testing Mode.
+
+In the Project Settings, navigate to the Service Accounts tab.
+
+Click Generate new private key, which will download a JSON file.
+
+Rename and move this file to your project directory as:
+
+pgsql
+Copy
+Edit
+firebaseserviceAccountKey.json
+⚙️ Firebase Configuration
+Copy the Realtime Database URL from your Firebase project.
+
+Create a file named firebaseConfig.js in the root of your project.
+
+Use the following structure to configure Firebase:
+
+js
+Copy
+Edit
+// firebaseConfig.js
+const admin = require("firebase-admin");
+const serviceAccount = require("./firebaseserviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://<your-database-name>.firebaseio.com", // Replace with your URL
+});
+
+module.exports = admin;
+📝 Environment Variables
+Create a .env file in the root directory to store sensitive information like API keys:
+
+env
+Copy
+Edit
+RESEND_API_KEY=your_resend_api_key_here
+Make sure to add .env to your .gitignore file.
+
 
 ### 1. Clone the Repository
 
@@ -26,63 +88,3 @@ This ensures reliable order logging and immediate admin awareness.
 git clone https://github.com/Yuvanandhini-R/shopify-backend.git
 cd shopify-backend
 
-⚙️ Project Setup & Development Workflow
-This project was built using Node.js, Express, Firebase Realtime Database, and Resend for email notifications. Below is a structured overview of the setup process:
-
-🔧 Step-by-Step Setup
-Initialize the Node.js Project
-
-bash
-Copy
-Edit
-npm init -y
-Install Required Dependencies Install essential backend and integration packages:
-
-bash
-Copy
-Edit
-npm install express body-parser dotenv firebase-admin
-npm install resend
-Configure Firebase
-
-Create a new Firebase project from the Firebase Console.
-
-Enable the Realtime Database in Testing Mode.
-
-Navigate to Project Settings > Service Accounts and generate a Private Key.
-
-Download the private key JSON file and place it in your project directory.
-
-Rename the file to:
-
-Copy
-Edit
-firebaseserviceAccount.js
-Set Up Firebase Configuration
-
-Create a new file called firebaseConfig.js.
-
-In this file, initialize Firebase using the private key and paste your Realtime Database URL from the Firebase console.
-
-Create the Main Application Entry Point
-
-Create a file named index.js.
-
-This is where you define your core logic, including webhook handling, database interactions, and email notifications.
-
-Add Environment Variables
-
-Create a .env file to securely store sensitive data such as:
-
-ini
-Copy
-Edit
-RESEND_API_KEY=your_resend_api_key
-ADMIN_EMAIL=admin@example.com
-▶️ Running the Project
-Use the following command to start the server:
-
-bash
-Copy
-Edit
-node index.js
